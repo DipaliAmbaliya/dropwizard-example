@@ -1,0 +1,62 @@
+server:
+  type: default
+  #http://localhost:8081/admin
+  adminContextPath: /admin
+  #http://localhost:8080/app/hello/
+  #http://localhost:8080/app/static/index.html
+  applicationContextPath: /app
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+
+  #If want to use our own exception mappers
+  registerDefaultExceptionMappers: false
+
+  #Disable the requestLog on console
+  requestLog:
+    appenders: []
+
+logging:
+  level: INFO
+  loggers:
+    dw.example: DEBUG
+
+tempDir: /tmp
+greetings:
+ - lang: en
+   pattern: Hello %s!
+ - lang: es
+   pattern: ¡Hola %s!
+ - lang: hu
+   pattern: Szia %s!
+database:
+  # the name of the JDBC driver, mysql in our case
+  driverClass: org.postgresql.Driver
+  # the username
+  user: postgres
+  # the password
+  password: root
+  # the JDBC URL; the database is called DWGettingStarted
+  url: jdbc:postgresql://localhost:5434/hra_system
+
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # the maximum amount of time to wait on an empty pool before throwing an exception
+  maxWaitForConnection: 1s
+
+  # the SQL query to run when validating a connection's liveness
+  validationQuery: "/* MyApplication Health Check */ SELECT 1"
+
+  # the minimum number of connections to keep open
+  minSize: 8
+
+  # the maximum number of connections to keep open
+  maxSize: 32
+
+  # whether or not idle connections should be validated
+  checkConnectionWhileIdle: false
